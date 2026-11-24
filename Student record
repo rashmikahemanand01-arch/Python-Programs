@@ -1,0 +1,27 @@
+# Student Record Management with List, Tuple, Dictionary and CSV
+import csv
+students = [
+{&quot;RollNo&quot;: &quot;101&quot;, &quot;Name&quot;: &quot;Anitha&quot;, &quot;Department&quot;: &quot;CSE&quot;, &quot;Mark&quot;: 86},
+{&quot;RollNo&quot;: &quot;102&quot;, &quot;Name&quot;: &quot;Bala&quot;, &quot;Department&quot;: &quot;CSE&quot;, &quot;Mark&quot;: 91},
+{&quot;RollNo&quot;: &quot;103&quot;, &quot;Name&quot;: &quot;Chitra&quot;, &quot;Department&quot;: &quot;ECE&quot;, &quot;Mark&quot;: 78}
+]
+# Tuple example: fixed course details
+course = (&quot;Python&quot;, 4)
+print(&quot;Course Tuple:&quot;, course)
+# Write text file
+with open(&quot;students.txt&quot;, &quot;w&quot;) as file:
+for student in students:
+file.write(str(student) + &quot;\n&quot;)
+# Write CSV file
+with open(&quot;students.csv&quot;, &quot;w&quot;, newline=&quot;&quot;) as file:
+fields = [&quot;RollNo&quot;, &quot;Name&quot;, &quot;Department&quot;, &quot;Mark&quot;]
+writer = csv.DictWriter(file, fieldnames=fields)
+writer.writeheader()
+writer.writerows(students)
+# Read CSV file
+print(&quot;\n--- Records from CSV ---&quot;)
+with open(&quot;students.csv&quot;, &quot;r&quot;) as file:
+reader = csv.DictReader(file)
+for row in reader:
+print(row[&quot;RollNo&quot;], row[&quot;Name&quot;],
+row[&quot;Department&quot;], row[&quot;Mark&quot;])
