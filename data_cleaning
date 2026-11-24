@@ -1,0 +1,29 @@
+# Data Cleaning and Exploratory Data Analysis using Pandas
+import pandas as pd
+data = {
+&quot;Name&quot;: [&quot;Anitha&quot;, &quot;Bala&quot;, &quot;Chitra&quot;, &quot;Dinesh&quot;, &quot;Ezhil&quot;, &quot;Fathima&quot;],
+&quot;Department&quot;: [&quot;CSE&quot;, &quot;CSE&quot;, &quot;ECE&quot;, &quot;CSE&quot;, &quot;ECE&quot;, &quot;CSE&quot;],
+&quot;Attendance&quot;: [92, 85, None, 88, 95, 90],
+&quot;Mark&quot;: [86, 91, 78, None, 95, 82]
+}
+df = pd.DataFrame(data)
+print(&quot;--- Original Dataset ---&quot;)
+print(df)
+print(&quot;\nMissing Values:&quot;)
+print(df.isnull().sum())
+# Missing value treatment
+df[&quot;Attendance&quot;] = df[&quot;Attendance&quot;].fillna(df[&quot;Attendance&quot;].mean())
+df[&quot;Mark&quot;] = df[&quot;Mark&quot;].fillna(df[&quot;Mark&quot;].mean())
+# Remove duplicate records
+df = df.drop_duplicates()
+print(&quot;\n--- Cleaned Dataset ---&quot;)
+print(df)
+print(&quot;\n--- Descriptive Statistics ---&quot;)
+print(df.describe())
+print(&quot;\n--- Department-wise Average Marks ---&quot;)
+print(df.groupby(&quot;Department&quot;)[&quot;Mark&quot;].mean().round(2))
+print(&quot;\n--- EDA Summary ---&quot;)
+print(&quot;Highest Mark :&quot;, df[&quot;Mark&quot;].max())
+print(&quot;Lowest Mark :&quot;, df[&quot;Mark&quot;].min())
+print(&quot;Average Mark :&quot;, round(df[&quot;Mark&quot;].mean(), 2))
+print(&quot;Average Attendance :&quot;, round(df[&quot;Attendance&quot;].mean(), 2))
